@@ -1,0 +1,21 @@
+{
+    "name": "rustPlusPlus-Credential-Application",
+    "version": "1.0.0",
+    "manifest_version": 3,
+    "background": { 
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://companion-rust.facepunch.com/*"],
+            "js": ["content.js"]
+        }
+    ],
+    "action": {
+        "default_title": "rustPlusPlus-Credential-Application"
+    },
+    "web_accessible_resources": [{
+        "resources": ["catcher.js"],
+        "matches": ["https://companion-rust.facepunch.com/*"]
+    }]
+}
