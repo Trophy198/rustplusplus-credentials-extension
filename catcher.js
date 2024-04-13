@@ -9,7 +9,7 @@ setInterval(() => {
             postMessage: function(message) {
                 var auth = JSON.parse(message);
                 window.location.href =
-                'http://localhost:3000/callback?token=' +
+                'https://rustplusplus-credentials.netlify.app/callback?token=' +
                 encodeURIComponent(auth.Token) + '&steamId=' + encodeURIComponent(auth.SteamId)                
             },
         };
