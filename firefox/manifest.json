@@ -2,15 +2,10 @@
     "name": "rustPlusPlus-Credential-Application",
     "version": "1.0.0",
     "manifest_version": 2,
-    "content_scripts": [
-        {
-            "matches": [
-                "https://companion-rust.facepunch.com/*"
-            ],
-            "js": [
-                "content.js"
-            ]
-        }
-    ],
+    "content_scripts": [{
+        "matches": ["https://companion-rust.facepunch.com/*"],
+        "js": ["content.js"],
+        "run_at": "document_start"
+    }],
     "permissions": []
 }
