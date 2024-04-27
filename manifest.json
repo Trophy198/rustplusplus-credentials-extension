@@ -1,14 +1,18 @@
 {
     "name": "rustPlusPlus-Credential-Application",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "manifest_version": 3,
     "background": { 
         "service_worker": "background.js"
     },
     "content_scripts": [
         {
-            "matches": ["https://companion-rust.facepunch.com/*"],
-            "js": ["content.js"]
+            "matches": ["https://companion-rust.facepunch.com/*",
+            "http://rustplusplus-credentials.netlify.app/*",
+            "https://rustplusplus-credentials.netlify.app/*"
+        ],
+            "js": ["content.js"],
+            "run_at": "document_start"
         }
     ],
     "action": {
