@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (button && description && image) {
             // description
             login_tag.setAttribute('class', 'overlay-footer');
-            login_tag.innerHTML = rustplusplus_login_description;
+            login_tag.textContent = rustplusplus_login_description;
             login_tag.style.color = '#A4A6A7';
             login_tag.style.paddingTop = '10px';
             container.appendChild(login_tag);
