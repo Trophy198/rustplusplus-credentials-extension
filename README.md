@@ -1,1 +1,1 @@
-rustpusplus-credentials-extension
+rustplusplus-credentials-extension
