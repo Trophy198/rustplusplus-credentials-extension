@@ -4,21 +4,36 @@
     "manifest_version": 2,
     "description": "Generate Rust+ credentials for the rustplusplus Discord bot from your browser.",
     "background": {
-        "scripts": ["auth.js", "background.js"]
+        "scripts": [
+            "auth.js",
+            "background.js"
+        ]
     },
     "browser_action": {
         "default_title": "rustPlusPlus-Credential-Application"
     },
-    "content_scripts": [{
-        "matches": ["https://companion-rust.facepunch.com/*",
-        "https://rustplusplus-credentials.netlify.app/*",
-        "http://rustplusplus-credentials.netlify.app/*"],
-        "js": ["content.js"],
-        "run_at": "document_start"
-    }],
+    "content_scripts": [
+        {
+            "matches": [
+                "https://companion-rust.facepunch.com/*",
+                "https://rustplusplus-credentials.netlify.app/*",
+                "http://rustplusplus-credentials.netlify.app/*"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "run_at": "document_start"
+        }
+    ],
     "permissions": [
         "webRequest",
         "webRequestBlocking",
         "https://companion-rust.facepunch.com/*"
-    ]
+    ],
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "{030b25bf-451b-49a7-bbba-3650145ef70a}",
+            "strict_min_version": "91.0"
+        }
+    }
 }
