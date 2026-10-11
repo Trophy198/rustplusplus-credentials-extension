@@ -6,7 +6,17 @@ document.addEventListener('DOMContentLoaded', function () {
         beacon.style.display = 'none';
         beacon.id = "mozAddon";
         document.body.appendChild(beacon);
-    } else if (typeof window.wrappedJSObject.ReactNativeWebView === 'undefined') {
+    } else {
+        // Facepunch login page (2026-10): point the empty returnUrl at the app
+        // flow so the login ends in a rust-plus:// redirect that background.js
+        // rewrites to the credential page.
+        const returnUrl = document.querySelector('form input[name="returnUrl"]');
+        if (returnUrl && !returnUrl.value) {
+            returnUrl.value = '/app?returnUrl=' + encodeURIComponent('rust-plus://rust-auth-session');
+        }
+    }
+    if (!location.href.includes('https://rustplusplus-credentials.netlify.app') && typeof window.wrappedJSObject.ReactNativeWebView === 'undefined') {
+        // Legacy flow (before 2026-10), kept in case Facepunch serves it again.
         const ReactNativeWebView = {
             postMessage: function(message) {
                 try {
