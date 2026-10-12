@@ -26,6 +26,11 @@ A desktop browser cannot open `rust-plus://`, so the extension:
    (`background.js`; Chrome reads the Location header and navigates the tab,
    Firefox rewrites the header with blocking webRequest).
 
+3. sends a non-Windows User-Agent on the `/app` request only. Facepunch's `/app` answers
+   "Login Failed" instead of redirecting when the User-Agent contains "windows" (checked
+   2026-10-13; macOS, Linux and Android user agents are redirected). Chrome uses the static
+   declarativeNetRequest rule in `rules.json`, Firefox rewrites the header in `background.js`.
+
 The pre-October-2026 `ReactNativeWebView.postMessage` capture (`catcher.js`) is kept as
 a fallback.
 

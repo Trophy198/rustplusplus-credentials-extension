@@ -24,3 +24,17 @@ browser.webRequest.onHeadersReceived.addListener(
     { urls: ['https://companion-rust.facepunch.com/*'], types: ['main_frame'] },
     ['blocking', 'responseHeaders'],
 );
+
+// Facepunch's /app refuses Windows user agents (see auth.js); send a
+// non-Windows UA for that request only so it redirects to rust-plus://.
+browser.webRequest.onBeforeSendHeaders.addListener(
+    function (details) {
+        if (details.url.indexOf(RPP.APP_URL_PREFIX) !== 0) return {};
+        var headers = details.requestHeaders.map(function (h) {
+            return h.name.toLowerCase() === 'user-agent' ? { name: h.name, value: RPP.APP_USER_AGENT } : h;
+        });
+        return { requestHeaders: headers };
+    },
+    { urls: ['https://companion-rust.facepunch.com/app*'], types: ['main_frame'] },
+    ['blocking', 'requestHeaders'],
+);
