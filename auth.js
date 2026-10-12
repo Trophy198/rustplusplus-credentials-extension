@@ -22,6 +22,18 @@ var RPP = (function () {
     var LOGIN_RETURN = '/app?returnUrl=' + encodeURIComponent(APP_RETURN);
     var LOGIN_URL = 'https://companion-rust.facepunch.com/login?returnUrl=' + encodeURIComponent(LOGIN_RETURN);
 
+    /**
+     * Facepunch's /app endpoint answers "Login Failed" instead of redirecting
+     * when the User-Agent contains "windows" (any case; checked 2026-10-13).
+     * macOS, Linux and Android user agents get the rust-plus:// redirect.
+     * The extension sends this UA for the /app request only. Chrome does it
+     * with the static declarativeNetRequest rule in rules.json (keep the two
+     * values in sync); Firefox with blocking webRequest in background.js.
+     */
+    var APP_USER_AGENT =
+        'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36';
+    var APP_URL_PREFIX = 'https://companion-rust.facepunch.com/app';
+
     /** Read a query parameter case-insensitively (Facepunch has used Token/token, SteamId/steamId). */
     function param(searchParams, name) {
         var lower = name.toLowerCase();
@@ -67,6 +79,8 @@ var RPP = (function () {
         CALLBACK: CALLBACK,
         LOGIN_RETURN: LOGIN_RETURN,
         LOGIN_URL: LOGIN_URL,
+        APP_USER_AGENT: APP_USER_AGENT,
+        APP_URL_PREFIX: APP_URL_PREFIX,
         callbackFor: callbackFor,
         locationHeader: locationHeader,
     };
